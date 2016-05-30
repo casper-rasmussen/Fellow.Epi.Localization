@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes></releaseNotes>
+	<projectUrl>https://github.com/casper-rasmussen/Fellow.Epi.Localization</projectUrl>
     <dependencies>
     </dependencies>  
   </metadata>
