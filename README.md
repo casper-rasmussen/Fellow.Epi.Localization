@@ -11,7 +11,7 @@ Please use this GitHub project for any issues, questions or other kinds of feedb
 
 ## Configuration
 
-Fellow.Epi.Localization requires two minor code adjustments in order to be fully integrated to your Episerver solution.
+Fellow.Epi.Localization requires two minor code adjustments in order to be fully integrated with your Episerver solution.
 
 ### Configuration changes
 
@@ -25,11 +25,84 @@ Please ensure that Episerver is aware of the translation add-on by adding the cu
 
 Adjusting the rule detailing which translatable fields to include is needed in order to use any customized structure in your XML Resource Files. It is a matter of implementing an IIncludeConvention and telling Fellow.Epi.Localization about this through Structuremap.
 
-<script src="https://gist.github.com/casper-rasmussen/0d1c1b3ad5f61f610454bedddb751a66.js"></script>
+```
+class ExampleIncludeConvention : IIncludeConvention
+{
+	public void Apply(Fellow.Epi.Localization.Manager.Convention.IConventionManager conventionManager)
+	{
+		conventionManager.IncludeArea("header");
+		conventionManager.IncludeArea("commerce");
+		conventionManager.IncludeArea("form");
+	}
+}
+```
+```
+[InitializableModule]
+[ModuleDependency(typeof(EPiServer.Web.InitializationModule))]
+public class DependencyResolverInitialization : IConfigurableModule
+{
+    public void ConfigureContainer(ServiceConfigurationContext context)
+    {
+        context.Container.Configure(ConfigureContainer);
 
-<script src="https://gist.github.com/casper-rasmussen/0faf40eb84907131c7316808818e055a.js"></script>
+        DependencyResolver.SetResolver(new StructureMapDependencyResolver(context.Container));
+    }
+
+    private static void ConfigureContainer(ConfigurationExpression container)
+    {
+	    //Other implementations goes here
+
+      container.For<IIncludeConvention>().Add<AlloyIncludeConvention>();
+
+    }
+
+    public void Initialize(InitializationEngine context)
+    {
+    }
+
+    public void Uninitialize(InitializationEngine context)
+    {
+    }
+}
+```
 
 Above implementation ensures that all resource elements below &lt;/header&gt;, &lt;/commerce&gt; and &lt;/form&gt; are included in the <em>Translations</em> gadget. Below is an example on a Resource File matching these conventions.
 
-<script src="https://gist.github.com/casper-rasmussen/e1d19cc02b672bb48586f8b616c78981.js"></script>
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<languages>
+  <language name="Danish" id="da-DK">
+    <header>
+      <mainnavigation>
+        <placeholders>
+          <search>Search</search>
+        </placeholders>
+      </mainnavigation>
+    </header>
+    <commerce>
+      <checkout>
+        <step1>
+          <labels>
+            <address>Address Line</address>
+            <postal>Postal Code</postal>
+            <!-- Elements removed for the sake of readability-->
+          </labels>
+        </step1>
+      </checkout>
+      <cart>
+        <inline>
+            <!-- Elements removed for the sake of readability -->
+          </labels>
+        </inline>
+        <dedicated>
+          <!-- Elements removed for the sake of readability-->
+        </dedicated>
+      </cart>
+    </commerce>
+    <form>
+        <!-- Elements removed for the sake of readability-->
+    </form>
+  </language>
+</languages>
+```
 
