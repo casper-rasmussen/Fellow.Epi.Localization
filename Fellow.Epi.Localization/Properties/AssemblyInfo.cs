@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Valtech.Base.Localization")]
+[assembly: AssemblyTitle("Fellow.Epi.Localization")]
 [assembly: AssemblyDescription("Localization Add-on for Episerver CMS and Episerver Commerce")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Casper Aagaard Rasmussen")]
