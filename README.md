@@ -52,7 +52,7 @@ public class DependencyResolverInitialization : IConfigurableModule
     {
 	    //Other implementations goes here
 
-      container.For<IIncludeConvention>().Add<AlloyIncludeConvention>();
+      container.For<IIncludeConvention>().Add<ExampleIncludeConvention>();
 
     }
 
