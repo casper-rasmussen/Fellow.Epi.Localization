@@ -234,12 +234,12 @@ namespace Fellow.Epi.Localization.Infrastructure.Editor.Content
 		public override ContentReference Save(IContent content, SaveAction action)
 		{
 			// we have a new version. Either the attendee has been autosaved, or it has been published or a new one has been created   
-			var translation = content as DefaultTranslationType;
+			DefaultTranslationType translation = content as DefaultTranslationType;
 
 			if(translation == null)
 				throw new ArgumentException("Content was not of type DefaultTranslationType", "content");
 
-			this._translationManager.Update(translation.Translation, translation.Key, ContentLanguage.PreferredCulture);
+			this._translationManager.Update(translation.Translation, translation.Key, translation.Language);
 
 			return translation.ContentLink;
 

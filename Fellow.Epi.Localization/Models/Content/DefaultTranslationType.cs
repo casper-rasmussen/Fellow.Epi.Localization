@@ -11,7 +11,7 @@ namespace Fellow.Epi.Localization.Models.Content
 		  GroupName = LocalizationGroupNames.TranslationTypeGroupName)]
 	[ContentType(
 		   GUID = "14bbf4a1-cd38-47f0-a550-1028cc989c6f",
-		   AvailableInEditMode = false,
+		   AvailableInEditMode = true,
 		   GroupName = LocalizationGroupNames.TranslationTypeGroupName,
 		   DisplayName = "Default Translaton")]
 	public class DefaultTranslationType : BasicContent, ILocalizable

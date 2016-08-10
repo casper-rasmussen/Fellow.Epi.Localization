@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using EPiServer.Framework.Localization;
 using EPiServer.Framework.Localization.XmlResources;
+using EPiServer.Globalization;
 using EPiServer.ServiceLocation;
 using Fellow.Epi.Localization.Manager.Convention;
 using Fellow.Epi.Localization.Repository.Translation;
@@ -27,12 +28,12 @@ namespace Fellow.Epi.Localization.Infrastructure.Providers
 				return null;
 			
 			//Lets get the default resource
-			string cultureString = base.GetString(originalKey, normalizedKey, culture);
+			string cultureString = base.GetString(originalKey, normalizedKey, ContentLanguage.PreferredCulture);
 
 			string value;
 
 			//Try and get the translation from our local source (overrides)
-			bool foundLocal = this.TryGetLocalTranslation(originalKey, culture, out value);
+			bool foundLocal = this.TryGetLocalTranslation(originalKey, ContentLanguage.PreferredCulture, out value);
 
 			if (foundLocal)
 				return value; //Found an override

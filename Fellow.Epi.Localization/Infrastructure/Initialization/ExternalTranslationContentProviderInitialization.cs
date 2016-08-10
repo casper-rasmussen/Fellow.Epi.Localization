@@ -22,7 +22,7 @@ namespace Fellow.Epi.Localization.Infrastructure.Initialization
 				// add configuration settings for entry point and capabilites
 				var providerValues = new NameValueCollection {
 					{ ContentProviderElement.EntryPointString, newsContentProvider.GetEntryPoint(TranslationDataRepositoryDescriptor.RepositoryKey).ToString() },
-					{ ContentProviderElement.CapabilitiesString, "Edit,Search" }
+					{ ContentProviderElement.CapabilitiesString, "Edit,Search,MultiLanguage" }
 				};
 
 				// initialize and register the provider
