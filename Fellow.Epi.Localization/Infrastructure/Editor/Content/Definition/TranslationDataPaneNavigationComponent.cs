@@ -7,7 +7,7 @@ namespace Fellow.Epi.Localization.Infrastructure.Editor.Content.Definition
 	public class TranslationDataPaneNavigationComponent : ComponentDefinitionBase
 	{
 		public TranslationDataPaneNavigationComponent()
-			: base("epi-cms.widget.HierarchicalList")
+			: base("epi-cms/widget/HierarchicalList")
         {
             Categories = new[] { "content" };
             Title = "Translations";
